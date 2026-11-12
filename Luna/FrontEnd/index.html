@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luna | Clínica e Estética Pet</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+
+  <body>
+    <!--Cabeçalho-->
+    <header class="header">
+      <a href="#" class="logo" data-page="home">
+        <span class="logo-symbol">🐶</span>
+
+        <span>
+          Luna
+          <small>Clínica e Estética Pet</small>
+        </span>
+      </a>
+
+      <nav class="header-actions">
+        <button id="loginButton" class="text-button">Entrar</button>
+        <button id="registerButton" class="header-button">Criar conta</button>
+      </nav>
+    </header>
+
+    <!--Principal-->
+    <main id="app">
+      <!-- SITE PÚBLICO -->
+      <div id="public-site">
+        <!--Tela de Inicio-->
+        <section id="home" class="page active">
+          <div class="home-content">
+            <p class="eyebrow">01 - UM NOVO JEITO DE CUIDAR DO SEU PET</p>
+
+            <h1>
+              O cuidado que<br />
+              eles sentem.<br />
+              <em>O carinho que você confia.</em>
+            </h1>
+
+            <p class="description">
+              Bem-estar, saúde e beleza em um só lugar. Um espaço pensado para
+              respeitar o tempo, o jeito e a personalidade do seu pet.
+            </p>
+
+            <div class="home-buttons">
+              <button class="primary-button" data-page="booking">
+                Agendar Atendimento ↗
+              </button>
+
+              <button class="secondary-button" data-page="services">
+                Conheça nossos serviços ↗
+              </button>
+            </div>
+          </div>
+
+          <div class="home-image">
+            <img
+              src="https://images.unsplash.com/photo-1551717743-49959800b1f6?w=900"
+              alt="Cachorro"
+            />
+          </div>
+        </section>
+
+        <!--Serviços-->
+        <section id="services" class="page">
+          <p class="eyebrow">02 - NOSSOS CUIDADOS</p>
+
+          <h2>
+            Pequenos serviços.<br />
+            <em>Grandes resultados.</em>
+          </h2>
+
+          <div class="services-list">
+            <article class="service-card">
+              <span>01</span>
+              <h3>Banho</h3>
+              <p>Higiene, conforto e relaxamento para o seu melhor aumigo ou miaumigo.</p>
+            </article>
+            <article class="service-card">
+              <span>02</span>
+              <h3>Consulta veterinária</h3>
+              <p>Atenção à saúde e ao bem-estar em todas as fases da vida.</p>
+            </article>
+          </div>
+        </section>
+
+        <!--SOBRE-->
+        <section id="about" class="page">
+          <div class="about-content">
+            <img
+              src="https://images.unsplash.com/photo-1581888227599-779811939961?w=900"
+              alt="Cachorro recebendo carinho"
+            />
+          </div>
+
+          <div class="about-content">
+            <p class="eyebrow">03 - SOBRE NÓS</p>
+
+            <h2>
+              Mais atenção<br />
+              em cada detalhe.<br />
+              <em>Mais carinho em cada encontro.</em>
+            </h2>
+
+            <p>
+              Acreditamos que cuidar vai além de oferecer um serviço. É conhecer
+              cada personalidade, acolher cada tutor e proporcionar uma
+              experiência positiva.
+            </p>
+
+            <button class="primary-button" data-page="booking">
+              Agendar uma visita ↗
+            </button>
+          </div>
+        </section>
+
+        <!--AGENDAMENTO/ENTRADA-->
+        <section id="booking" class="page">
+          <div class="booking-content">
+            <p class="eyebrow">04 - SEU PRÓXIMO PASSO</p>
+
+            <h2>
+              Um cuidado especial<br />
+              merece <em>hora marcada.</em>
+            </h2>
+
+            <p>
+              Cadastre seu pet e escolha o melhor momento para cuidar dele.
+            </p>
+
+            <button class="primary-button" data-page="register">
+              Criar minha conta ↗
+            </button>
+
+            <p>
+              Já possui cadastro?
+              <button class="inline-button" data-page="login">Entrar</button>
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <!-- ÁREA DO CLIENTE -->
+
+      <div id="client-area" hidden>
+        <!--LOGIN-->
+        <section id="login" class="page auth-page">
+          <div class="auth-container">
+            <p class="eyebrow">BEM-VINDO DE VOLTA</p>
+
+            <h2>Acesse sua conta.</h2>
+
+            <form id="loginForm">
+              <label for="loginEmail">E-mail</label>
+              <input
+                type="email"
+                id="loginEmail"
+                name="loginEmail"
+                placeholder="seuemail@email.com"
+                required
+              />
+
+              <label for="loginPassword">Senha</label>
+              <input
+                type="password"
+                id="loginPassword"
+                name="loginPassword"
+                placeholder="Sua senha"
+                required
+              />
+
+              <button type="submit" class="primary-button">
+                Entrar na minha conta
+              </button>
+            </form>
+
+            <p>
+              Não possui cadastro?
+              <button class="inline-button" data-page="register">
+                Cadastre-se
+              </button>
+            </p>
+          </div>
+        </section>
+
+        <!--CADASTRO-->
+        <section id="register" class="page auth-page">
+          <div class="auth-container">
+            <p class="eyebrow">VAMOS NOS CONHECER?</p>
+
+            <h2>Crie sua conta.</h2>
+
+            <form id="registerForm">
+              <label for="registerName">Nome completo</label>
+              <input
+                type="text"
+                id="registerName"
+                placeholder="Seu nome"
+                required
+              />
+
+              <label for="registerEmail">E-mail</label>
+              <input
+                type="email"
+                id="registerEmail"
+                placeholder="seuemail@email.com"
+                required
+              />
+
+              <label for="registerPhone">Telefone</label>
+              <input
+                type="tel"
+                id="registerPhone"
+                placeholder="(00) 00000-0000"
+                required
+              />
+
+              <label for="registerPassword">Senha</label>
+              <input
+                type="password"
+                id="registerPassword"
+                placeholder="Crie uma senha"
+                minlength="6"
+                required
+              />
+
+              <button type="submit" class="primary-button">
+                Criar minha conta
+              </button>
+            </form>
+
+            <p>
+              Já tem uma conta?
+              <button class="inline-button" data-page="login">
+                Fazer login
+              </button>
+            </p>
+          </div>
+        </section>
+
+        <!--PAINEL DO CLIENTE-->
+        <section id="dashboard" class="page dashboard-page">
+          <div class="dashboard-content">
+            <p class="eyebrow">ÁREA DO CLIENTE</p>
+
+            <h2>Olá, <span id="clientName">cliente</span>!</h2>
+
+            <p>Que bom ter você e seu pet por aqui.</p>
+
+            <div class="dashboard-cards">
+              <article class="dashboard-card">
+                <span>🐾</span>
+                <h3>Meus animais</h3>
+                <p>Gerencie os perfis dos seus pets.</p>
+                <button data-page="pets">Acessar →</button>
+              </article>
+
+              <article class="dashboard-card">
+                <span>📅</span>
+                <h3>Agendamentos</h3>
+                <p>Consulte seus próximos atendimentos.</p>
+                <button data-page="appointments">Acessar →</button>
+              </article>
+
+              <article class="dashboard-card">
+                <span>＋</span>
+                <h3>Novo agendamento</h3>
+                <p>Escolha um serviço para seu pet.</p>
+                <button data-page="newAppointment">Agendar →</button>
+              </article>
+            </div>
+
+            <button id="logoutButton" class="text-button">Sair da conta</button>
+          </div>
+        </section>
+
+        <!-- MEUS ANIMAIS -->
+        <section id="pets" class="page dashboard-page">
+          <div class="dashboard-content">
+            <p class="eyebrow">MINHA FAMÍLIA</p>
+
+            <h2>Meus animais.</h2>
+
+            <p>Todos os seus companheiros em um só lugar.</p>
+
+            <form id="petForm" class="data-form">
+              <label for="petName">Nome do animal</label>
+              <input id="petName" type="text" required />
+
+              <label for="petSpecies">Espécie</label>
+              <select id="petSpecies" required>
+                <option value="">Selecione</option>
+                <option value="Cachorro">Cachorro</option>
+                <option value="Gato">Gato</option>
+                <option value="Outro">Outro</option>
+              </select>
+
+              <label for="petGender">Gênero</label>
+              <select id="petGender" required>
+                <option value="">Selecione</option>
+                <option value="Macho">Macho</option>
+                <option value="Fêmea">Fêmea</option>
+              </select>
+
+              <label for="petBreed">Raça</label>
+              <input id="petBreed" type="text" />
+
+              <label for="petAge">Idade (anos)</label>
+              <input id="petAge" type="number" min="0" step="1" required />
+
+              <label for="petSize">Porte</label>
+              <select id="petSize" required>
+                <option value="">Selecione</option>
+                <option value="Pequeno">Pequeno</option>
+                <option value="Médio">Médio</option>
+                <option value="Grande">Grande</option>
+              </select>
+
+              <button type="submit" class="primary-button">
+                Cadastrar animal
+              </button>
+            </form>
+
+            <div id="petList" class="item-list"></div>
+
+            <button class="secondary-button" data-page="dashboard">
+              ← Voltar ao painel
+            </button>
+          </div>
+        </section>
+
+        <!--NOVO AGENDAMENTO-->
+        <section id="newAppointment" class="page dashboard-page">
+          <div class="dashboard-content">
+            <p class="eyebrow">CUIDADO COM HORA MARCADA</p>
+
+            <h2>Novo agendamento.</h2>
+
+            <form id="appointmentForm" class="data-form">
+              <label for="appointmentPet">Qual é o seu pet?</label>
+              <select id="appointmentPet" required>
+                <option value="">Selecione seu animal</option>
+              </select>
+
+              <label for="appointmentService">Serviço</label>
+              <select id="appointmentService" required>
+                <option value="">Selecione o serviço</option>
+              </select>
+
+              <label for="appointmentDate">Data</label>
+              <input id="appointmentDate" type="date" required />
+
+              <label for="appointmentTime">Horário</label>
+              <select id="appointmentTime" required>
+                <option value="">Selecione o horário</option>
+                <option>09:00</option>
+                <option>10:00</option>
+                <option>11:00</option>
+                <option>13:00</option>
+                <option>14:00</option>
+                <option>15:00</option>
+                <option>16:00</option>
+              </select>
+
+              <button type="submit" class="primary-button">
+                Confirmar agendamento
+              </button>
+            </form>
+
+            <button class="secondary-button" data-page="dashboard">
+              ← Voltar ao painel
+            </button>
+          </div>
+        </section>
+
+        <!--MEUS AGENDAMENTOS-->
+        <section id="appointments" class="page dashboard-page">
+          <div class="dashboard-content">
+            <p class="eyebrow">MINHA AGENDA</p>
+
+            <h2>Meus agendamentos.</h2>
+
+            <p>Acompanhe os cuidados programados para seus pets.</p>
+
+            <div id="appointmentList" class="item-list"></div>
+
+            <button class="primary-button" data-page="newAppointment">
+              Novo agendamento +
+            </button>
+
+            <button class="secondary-button" data-page="dashboard">
+              ← Voltar ao painel
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!--JAVASCRIPT-->
+    <script src="js/navigation.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/pets.js"></script>
+    <script src="js/appointments.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
