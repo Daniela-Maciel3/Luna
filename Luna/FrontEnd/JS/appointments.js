@@ -6,10 +6,9 @@ const appointmentService = document.querySelector("#appointmentService");
 
 const APPOINTMENT_API = "http://localhost:8080/agendamentos";
 
-// Guarda os agendamentos carregados do backend
 let appointments = [];
 
-// Atualiza a lista de animais disponíveis
+// BUSCAR ANIMAIS PARA O CAMPO DE SELEÇÃO
 async function loadPetOptions() {
     if (!appointmentPet) return;
 
@@ -17,21 +16,18 @@ async function loadPetOptions() {
 
     const pets = getPets();
 
-    appointmentPet.innerHTML = `
-        <option value="">Selecione seu animal</option>
-    `;
+    appointmentPet.innerHTML =
+        '<option value="">Selecione seu animal</option>';
 
     pets.forEach(pet => {
         const option = document.createElement("option");
-
         option.value = pet.id;
         option.textContent = pet.nome;
-
         appointmentPet.appendChild(option);
     });
 }
 
-// Busca os serviços cadastrados no backend
+// BUSCAR SERVIÇOS PARA O CAMPO DE SELEÇÃO
 async function loadServiceOptions() {
     if (!appointmentService) return;
 
@@ -49,7 +45,6 @@ async function loadServiceOptions() {
 
         services.forEach(service => {
             const option = document.createElement("option");
-
             option.value = service.id;
             option.textContent =
                 `${service.nome} - R$ ${Number(service.preco).toFixed(2)}`;
@@ -63,7 +58,7 @@ async function loadServiceOptions() {
     }
 }
 
-// Cadastra um agendamento no backend
+// CADASTRAR AGENDAMENTO
 if (appointmentForm) {
     appointmentForm.addEventListener("submit", async function(event) {
         event.preventDefault();
@@ -71,7 +66,7 @@ if (appointmentForm) {
         const user = getLoggedUser();
 
         if (!user) {
-            alert("Você precisa entrar na sua conta.");
+            alert("Faça login para realizar um agendamento.");
             navigateTo("login");
             return;
         }
@@ -81,7 +76,7 @@ if (appointmentForm) {
         const pet = pets.find(item => item.id === petId);
 
         if (!pet) {
-            alert("Selecione um animal cadastrado.");
+            alert("Selecione um animal.");
             return;
         }
 
@@ -106,16 +101,19 @@ if (appointmentForm) {
         };
 
         try {
-            const response = await fetch(APPOINTMENT_API, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(appointment)
-            });
+            const response = await fetch(
+                `${APPOINTMENT_API}?tutorId=${user.id}`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(appointment)
+                }
+            );
 
             if (!response.ok) {
-                throw new Error("Não foi possível cadastrar o agendamento.");
+                throw new Error("Não foi possível realizar o agendamento.");
             }
 
             alert("Agendamento solicitado com sucesso!");
@@ -123,31 +121,38 @@ if (appointmentForm) {
             appointmentForm.reset();
 
             await loadAppointments();
-
             renderAppointments();
 
         } catch (error) {
             console.error("Erro ao cadastrar agendamento:", error);
-            alert("Não foi possível realizar o agendamento. Verifique o backend.");
+            alert("Não foi possível realizar o agendamento.");
         }
     });
 }
 
-// Busca os agendamentos no backend
+// BUSCAR SOMENTE OS AGENDAMENTOS DO TUTOR CONECTADO
 async function loadAppointments() {
     if (!appointmentList) return;
 
+    const user = getLoggedUser();
+
+    if (!user) {
+        appointments = [];
+        renderAppointments();
+        return;
+    }
+
     try {
-        const response = await fetch(APPOINTMENT_API);
+        const response = await fetch(
+            `${APPOINTMENT_API}?tutorId=${user.id}`
+        );
 
         if (!response.ok) {
             throw new Error("Não foi possível carregar os agendamentos.");
         }
 
-        const data = await response.json();
-
-        // Mostra somente os agendamentos do tutor de teste
-        appointments = data;
+        appointments = await response.json();
+        renderAppointments();
 
     } catch (error) {
         console.error("Erro ao carregar agendamentos:", error);
@@ -160,8 +165,7 @@ async function loadAppointments() {
     }
 }
 
-// Mostra os agendamentos
-
+// EXIBIR AGENDAMENTOS NA TELA
 function renderAppointments() {
     if (!appointmentList) return;
 
@@ -180,20 +184,18 @@ function renderAppointments() {
         const card = document.createElement("article");
         card.className = "item-card";
 
-        const data = appointment.data || "";
-        const partes = data.split(" ");
-
-        const nomePet = appointment.animal?.nome || "Animal";
-        const nomeServico = appointment.servico?.nome || "Serviço";
-
         const title = document.createElement("h3");
-        title.textContent = nomeServico;
+        title.textContent = appointment.servico?.nome || "Serviço";
 
         const details = document.createElement("p");
+
+        const partes = (appointment.data || "").split(" ");
+        const data = partes[0] || "";
+        const horario = partes[1] || "";
+
         details.textContent =
-            `Pet: ${nomePet} | ` +
-            `Data: ${partes[0] || "Não informada"} | ` +
-            `Horário: ${partes[1] || "Não informado"}`;
+            `Pet: ${appointment.animal?.nome || "Animal"} | ` +
+            `Data: ${data} | Horário: ${horario}`;
 
         card.appendChild(title);
         card.appendChild(details);

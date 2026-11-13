@@ -1,34 +1,28 @@
+
 const petForm = document.querySelector("#petForm");
 const petList = document.querySelector("#petList");
 
-// Endereço do backend
 const API_URL = "http://localhost:8080/animais";
 
-// ID do tutor cadastrado para teste
-const TUTOR_ID = 1;
-
-// Guarda os animais carregados do backend
 let pets = [];
 
-// Recupera o usuário logado no frontend
 function getLoggedUser() {
     return JSON.parse(localStorage.getItem("loggedUser"));
 }
 
-// Recupera os animais carregados do backend
 function getPets() {
     return pets;
 }
 
-// Cadastra um novo animal
+// CADASTRAR ANIMAL
 if (petForm) {
     petForm.addEventListener("submit", async function(event) {
         event.preventDefault();
 
-        const user = JSON.parse(localStorage.getItem("loggedUser"));
+        const user = getLoggedUser();
 
         if (!user) {
-            alert("Você precisa entrar na sua conta.");
+            alert("Faça login para cadastrar um animal.");
             navigateTo("login");
             return;
         }
@@ -41,7 +35,7 @@ if (petForm) {
             idade: Number(document.querySelector("#petAge").value),
             porte: document.querySelector("#petSize").value,
             tutor: {
-                id: TUTOR_ID
+                id: user.id
             }
         };
 
@@ -58,8 +52,6 @@ if (petForm) {
                 throw new Error("Não foi possível cadastrar o animal.");
             }
 
-            const savedPet = await response.json();
-
             alert("Animal cadastrado com sucesso!");
 
             petForm.reset();
@@ -68,17 +60,27 @@ if (petForm) {
 
         } catch (error) {
             console.error("Erro ao cadastrar animal:", error);
-            alert("Não foi possível cadastrar o animal. Verifique o backend.");
+            alert("Não foi possível cadastrar o animal.");
         }
     });
 }
 
-// Busca os animais no backend
+// BUSCAR ANIMAIS DO TUTOR CONECTADO
 async function loadPets() {
     if (!petList) return;
 
+    const user = getLoggedUser();
+
+    if (!user) {
+        pets = [];
+        renderPets();
+        return;
+    }
+
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(
+            `${API_URL}?tutorId=${user.id}`
+        );
 
         if (!response.ok) {
             throw new Error("Não foi possível carregar os animais.");
@@ -86,14 +88,10 @@ async function loadPets() {
 
         pets = await response.json();
 
-        // Por enquanto, filtra pelo tutor de teste
-        pets = pets.filter(pet => pet.tutor?.id === TUTOR_ID);
-
         renderPets();
 
     } catch (error) {
         console.error("Erro ao carregar animais:", error);
-
         petList.innerHTML = `
             <p class="empty-message">
                 Não foi possível carregar seus animais.
@@ -102,8 +100,7 @@ async function loadPets() {
     }
 }
 
-// Mostra os animais cadastrados
-
+// EXIBIR ANIMAIS NA TELA
 function renderPets() {
     if (!petList) return;
 

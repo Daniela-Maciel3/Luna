@@ -1,3 +1,4 @@
+
 package com.luna.controller;
 
 import com.luna.entity.Tutor;
@@ -23,5 +24,13 @@ public class TutorController {
     @PostMapping
     public Tutor salvar(@RequestBody Tutor tutor) {
         return tutorService.salvar(tutor);
+    }
+
+    @PostMapping("/login")
+    public Tutor login(@RequestBody Tutor tutor) {
+        return tutorService.login(
+                tutor.getEmail(),
+                tutor.getSenha()
+        );
     }
 }

@@ -1,3 +1,4 @@
+
 package com.luna.controller;
 
 import com.luna.entity.Animal;
@@ -16,8 +17,8 @@ public class AnimalController {
     private AnimalService animalService;
 
     @GetMapping
-    public List<Animal> listar() {
-        return animalService.listarTodos();
+    public List<Animal> listar(@RequestParam Long tutorId) {
+        return animalService.listarPorTutor(tutorId);
     }
 
     @PostMapping

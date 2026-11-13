@@ -1,6 +1,8 @@
+
 package com.luna.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Entity
@@ -9,17 +11,15 @@ public class Tutor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String nome;
 
-    private String cpf;
-
-    private String genero;
+    @Column(unique = true)
+    private String email;
 
     private String telefone;
 
-    private String endereco;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String senha;
 }
-

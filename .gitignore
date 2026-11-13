@@ -1,0 +1,15 @@
+
+# Configurações locais e credenciais
+**/application.properties
+
+# Arquivos gerados pelo Java/Maven
+**/target/
+**/build/
+
+# Configurações de editores
+.vscode/
+.idea/
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db

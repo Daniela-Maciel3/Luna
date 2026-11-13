@@ -1,10 +1,10 @@
+
 package com.luna.controller;
 
 import com.luna.entity.Agendamento;
 import com.luna.service.AgendamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -17,12 +17,15 @@ public class AgendamentoController {
     private AgendamentoService service;
 
     @GetMapping
-    public List<Agendamento> listar() {
-        return service.listarTodos();
+    public List<Agendamento> listar(@RequestParam Long tutorId) {
+        return service.listarPorTutor(tutorId);
     }
 
     @PostMapping
-    public Agendamento salvar(@RequestBody Agendamento agendamento) {
-        return service.salvar(agendamento);
+    public Agendamento salvar(
+            @RequestParam Long tutorId,
+            @RequestBody Agendamento agendamento) {
+
+        return service.salvar(agendamento, tutorId);
     }
 }
