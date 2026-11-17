@@ -1,0 +1,19 @@
+.titulo{
+    text-align: center;
+    font-size: 5rem;
+    color: #d80d73;
+    margin: 20px 0;
+    font-family: Impact, Times New Roman, sans-serif;
+}
+
+body{
+   
+    padding: 40px;
+}
+
+input{
+    display:block;
+    margin:10px 0;
+}
+
+

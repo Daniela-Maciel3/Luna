@@ -1,0 +1,111 @@
+
+/* =========================
+      LOGIN E CADASTRO
+========================= */
+
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F4F1E9;
+    padding: 35px 7%;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 460px;
+    padding: 35px;
+    background: #FAF8F3;
+    border: 1px solid var(--border);
+}
+
+.auth-container h2 {
+    font-size: 38px;
+    margin-bottom: 30px;
+}
+
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-container label,
+.data-form label {
+    font-size: 11px;
+    font-weight: 700;
+    margin: 15px 0 8px;
+}
+
+.auth-container input,
+.data-form input,
+.data-form select,
+.data-form textarea {
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    border: 1px solid var(--border);
+    outline: none;
+    color: var(--text);
+    font-size: 12px;
+    transition: border-color 0.2s ease;
+}
+
+.auth-container input:focus,
+.data-form input:focus,
+.data-form select:focus,
+.data-form textarea:focus {
+    border-color: var(--primary-dark);
+}
+
+.auth-container input::placeholder,
+.data-form input::placeholder,
+.data-form textarea::placeholder {
+    color: #999B93;
+}
+
+.auth-container form button {
+    margin-top: 25px;
+    width: 100%;
+}
+
+.auth-container form button:hover {
+    background: var(--primary-dark);
+}
+
+.auth-container > p:last-child {
+    margin-top: 25px;
+    font-size: 11px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+/* =========================
+       RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+
+    .auth-page {
+        min-height: calc(100vh - 68px);
+        padding: 30px 7%;
+    }
+
+    .auth-container {
+        padding: 28px;
+    }
+
+    .auth-container h2 {
+        font-size: 34px;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .auth-container {
+        padding: 22px;
+    }
+
+    .auth-container h2 {
+        font-size: 30px;
+    }
+}
